@@ -9,7 +9,7 @@ function getEmployeeByName(employeeName) {
     return (colaboradoresId);
   } // Fim do if
   if (colaboradoresId === undefined) {
-    return ('');
+    return {};
   } // fim do if;
 }
 console.log(getEmployeeByName('Nigel'));

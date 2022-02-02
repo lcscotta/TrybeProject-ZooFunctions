@@ -4,7 +4,7 @@ const { species } = data;
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
   const animalId = (species.name);
-  if (species.name === 'string') {
+  if (animal === 'string') {
     return (`${species.name}`);
   }
 
