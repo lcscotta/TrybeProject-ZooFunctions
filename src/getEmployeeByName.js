@@ -4,13 +4,14 @@ const { employees } = data;
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
-  const colaboradoresId = employees.find(employees);
-  if (typeof employees.firstName === 'string' || typeof employees.lastName === 'string') {
-    return (colaboradoresId);
-  } // Fim do if
-  if (colaboradoresId === undefined) {
+  if (employeeName === undefined) {
     return {};
-  } // fim do if;
-}
+  } // Fim do <IF>
+
+  return employees.find(
+    ({ firstName, lastName }) =>
+      firstName === employeeName || lastName === employeeName,
+  );
+} // Fim da função
 console.log(getEmployeeByName('Nigel'));
 module.exports = getEmployeeByName;
