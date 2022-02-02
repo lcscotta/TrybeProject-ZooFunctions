@@ -4,21 +4,21 @@ const { employees } = data;
 
 function isManager(id) {
   // seu código aqui
-  const managers = (id) => employees.some((details) => details.managers.find(id)=(id === id));
+  return employees.some((employee) => employee.managers.includes(id));
 }
-console.log(isManager(id));
 
 function getRelatedEmployees(managerId) {
   // seu código aqui
-  const managersList = [];
-  for(let i = 0; i < managersList.length; i += 1) {
-   if (managers === 'gerente') { // Começo do if
-     return (managersList[i].length);
-  } else { // Fim do if
-    throw new Error('O id inserido não é de uma pessoa colaboradora gerente!')
-    }
-  } // Fim do for
-}
-console.log(getRelatedEmployees([ 'Burl Bethea', 'Ola Orloff', 'Emery Elser' ]))
+  // Começo do if
+  if (isManager(managerId)) {
+    // Recebe cada funcionário existence, filtra a lista
+    return employees
+      .filter((employee) => employee.managers.includes(managerId))
+      .map((employee) => `${employee.firstName} ${employee.lastName}`); // Separar os funcionários gerenciados pela pessoa
+  }
+  throw new Error('O id inserido não é de uma pessoa colaboradora gerente!');
+} // fim do IF
+
+// console.log(getRelatedEmployees(['Burl Bethea', 'Ola Orloff', 'Emery Elser']));
 
 module.exports = { isManager, getRelatedEmployees };
