@@ -1,22 +1,13 @@
 const data = require('../data/zoo_data');
 
 const { species } = data;
-function getAnimalsOlderThan(animal, age) {
+function getAnimalsOlderThan(animalName, residentAge) {
   // seu código aqui
-  const animalId = (species.name);
-  if (animal === 'string') {
-    return (`${species.name}`);
-  }
-
-  const ageClassification = (species.age);
-  if (age < 10) {
-    return ('Young');
-  } if (age < 50) {
-    return ('Adult');
-  } if (age > 50) {
-    return ('Senior');
-  }
-  return (animalId, ageClassification); // Fim da variável ageclassification
+  const animalSearcher = species.find((specie) => specie.name === animalName);
+  // O <Every> verifica se todos elementos atendem uma condição!
+  return animalSearcher.residents.every(
+    (resident) => resident.age >= residentAge,
+  );
 }
-console.log(getAnimalsOlderThan('lion', 20));
+console.log(getAnimalsOlderThan('lions', 5));
 module.exports = getAnimalsOlderThan;
