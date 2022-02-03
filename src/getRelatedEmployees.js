@@ -3,12 +3,10 @@ const data = require('../data/zoo_data');
 const { employees } = data;
 
 function isManager(id) {
-  // seu código aqui
   return employees.some((employee) => employee.managers.includes(id));
 }
 
 function getRelatedEmployees(managerId) {
-  // seu código aqui
   // Começo do if
   if (isManager(managerId)) {
     // Recebe cada funcionário existence, filtra a lista
