@@ -19,15 +19,14 @@ function countEntrants(entrants) {
 }
 
 function calculateEntry(entrants) {
+  if (!entrants || !entrants.length) {
+    return 0;
+  }
   const totalEntrants = countEntrants(entrants);
   const adultPrice = prices.adult * totalEntrants.adult;
   const childPrice = prices.child * totalEntrants.child;
   const seniorPrice = prices.senior * totalEntrants.senior;
   const totalCost = childPrice + adultPrice + seniorPrice;
-
-  if (prices === undefined || countEntrants[entrants] === undefined) {
-    return 0; // Retorna 0 se o argumento ou o objeto forem vazios
-  }
   return totalCost;
 }
 
