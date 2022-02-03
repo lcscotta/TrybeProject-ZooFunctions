@@ -20,17 +20,14 @@ function countEntrants(entrants) {
 
 function calculateEntry(entrants) {
   const totalEntrants = countEntrants(entrants);
-  const totalCost =
-    prices.adult * totalEntrants.adult +
-    prices.child * totalEntrants.child +
-    prices.senior * totalEntrants.senior;
+  const adultPrice = prices.adult * totalEntrants.adult;
+  const childPrice = prices.child * totalEntrants.child;
+  const seniorPrice = prices.senior * totalEntrants.senior;
+  const totalCost = childPrice + adultPrice + seniorPrice;
 
   if (prices === undefined || countEntrants[entrants] === undefined) {
-    return countEntrants(' 0 '); // Retorna 0 se o argumento ou o objeto forem vazios
-  } // fim do IF
-  // if (prices === true) {
-  //   return countEntrants[entrants].lenght;
-  // } // fim do IF
+    return 0; // Retorna 0 se o argumento ou o objeto forem vazios
+  }
   return totalCost;
 }
 
