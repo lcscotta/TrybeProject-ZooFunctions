@@ -16,9 +16,9 @@ function peopleSearcher(employee) {
   // }));
   return employees.find(
     (selectedEmployee) =>
-      selectedEmployee.firstName === employee.name ||
-      selectedEmployee.lastName === employee.name ||
-      selectedEmployee.id === employee.name,
+      selectedEmployee.firstName === employee.name
+      || selectedEmployee.lastName === employee.name
+      || selectedEmployee.id === employee.name,
   );
 }
 // Função que valida animais.
@@ -27,8 +27,7 @@ function animalSearcher(employee) {
   const animals = [];
   // confere os dados dos animais. O que acha no forEach é jogado na array através do push dos bichim.
   employee.responsibleFor.forEach((specieId) =>
-    animals.push(species.find((specie) => specieId === specie.id)),
-  );
+    animals.push(species.find((specie) => specieId === specie.id)));
   return animals;
 }
 
@@ -42,9 +41,9 @@ function objectMaker(employee, animals) {
     locationNames.concat(animal.location);
   });
   maker.id = employee.id;
-  maker.fullName = `${employee.firstName} + ' ' + ${employee.lastName}`;
-  maker.species = animalsNames;
-  maker.location = locationNames;
+  maker.fullName = `${employee.firstName} ${employee.lastName}`;
+  maker.species = animals.animalsNames;
+  maker.location = animals.locationNames;
   return maker;
 }
 
@@ -57,15 +56,15 @@ function getEmployeesCoverage(employees1) {
   // condicional que setta os parâmetros dos dados dos funcionários.
   // ATENÇÃO: O segundo parâmetro SEMPRE é a comparação com o valor inserido de teste no final.˜
   if (
-    employees.firstName === employees1.Name ||
-    employees.lastName === employees1.Name ||
-    employees.id === employees1.id
+    employees.firstName === employees1.Name
+    || employees.lastName === employees1.Name
+    || employees.id === employees1.id
   ) {
     return optimizeReturn(employees1);
   } // fim do primeiro IF.
 
   // condicional que nega dados inválidos
-  if (peopleSearcher().id === undefined) {
+  if (getEmployeesCoverage(employees1) === undefined) {
     throw new Error('Informações inválidas');
   } // fim do último IF.
   return peopleSearcher();
