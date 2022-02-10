@@ -1,8 +1,9 @@
+/* eslint-disable import/prefer-default-export */
 const data = require('../data/zoo_data');
 
 const { employees } = data;
 
-function getEmployeeByName(employeeName) {
+export function getEmployeeByName(employeeName) {
   // seu código aqui
   if (employeeName === undefined) {
     return {};
