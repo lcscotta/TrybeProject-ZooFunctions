@@ -5,8 +5,6 @@
 
 const data = require('../data/zoo_data');
 
-// const { getEmployeeByName } = require('./getEmployeeByName');
-
 const { employees } = data;
 
 const { species } = data;
@@ -24,16 +22,16 @@ function peopleSearcher(employee) {
       || selectedEmployee.lastName === employee.name
       || selectedEmployee.id === employee.name,
   );
-}
-// // Função que valida animais.
-function animalSearcher(employee) {
-  // settando espaço para arrays.
-  const animals = [];
-  // confere os dados dos animais. O que acha no forEach é jogado na array através do push dos bichim.
-  employees.responsibleFor.forEach((specieId) =>
-    animals.push(species.find((specie) => specieId === specie.id)));
-  return animals;
-}
+// }
+// // // Função que valida animais.
+// function animalSearcher(employee) {
+//   // settando espaço para arrays.
+//   const animals = [];
+//   // confere os dados dos animais. O que acha no forEach é jogado na array através do push dos bichim.
+//   employees.responsibleFor.forEach((specieId) =>
+//     animals.push(species.find((specie) => specieId === specie.id)));
+//   return animals;
+// }
 
 function animalIdSearch({ responsibleFor }) {
   // Variável que vê se o ID está incluso em responsibleFor.
@@ -79,7 +77,7 @@ function getEmployeesCoverage(employees1) {
   const { name, id } = employees1;
   // Interrogação = retorno do true. : = if menor ['false']. Chama outras funções que fiz. => Se o obj tiver a propriedade name, retorna só a pessoa correspondente. Id também.
   const employee = name ? getEmployeeByName(name) : getEmployeeById(id);
-  const animals = animalIdSearch(employee);
+  const animals = animalIdSearch({ responsibleFor });
   // Condicional de erro caso não exista infos dos funcionários.
   if (!employee.id || !employee.firstName || !employee.lastName) {
     throw new Error('Informações inválidas');

@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 const { species, hours } = require('../data/zoo_data');
 
 function checkWeekDay(string) {
@@ -22,7 +21,8 @@ function workingWeek(dayWeek, { open, close }) {
   return { [dayWeek]: {
     officeHour: `Open from ${open}am until ${close}pm`,
     // Mostra os animais disponíveis, filtrados do array de espécies disponíveis.
-    exhibition: species.filter((specie) => specie.availability.includes(dayWeek)).map(({ name }) => name),
+    exhibition: species.filter((specie) => specie.availability.includes(dayWeek))
+      .map(({ name }) => name),
   } };
 }
 
