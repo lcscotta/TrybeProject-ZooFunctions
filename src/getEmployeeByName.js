@@ -3,7 +3,7 @@ const data = require('../data/zoo_data');
 
 const { employees } = data;
 
-export function getEmployeeByName(employeeName) {
+function getEmployeeByName(employeeName) {
   // seu código aqui
   if (employeeName === undefined) {
     return {};
