@@ -10,20 +10,25 @@ const { employees } = data;
 const { species } = data;
 
 // Função que valida funcionários.
-function peopleSearcher() {
+function peopleSearcher({ id, firstName, lastName, responsibleFor }) {
   // <Find> bate os dados esperados a serem retornados dos parâmetros fornecidos.
-  // Retorna um objeto com os dados desejados, settados ali em cima.
-  // if (!employee) {
-  //   return employees;
-  // }
-  // const employees = name ? getEmployeeByName(name) : getEmployeeById(id);
-  return employees.find(
-    (selectedEmployee) =>
-      selectedEmployee.firstName === employees.name
-      || selectedEmployee.lastName === employees.name
-      || selectedEmployee.id === employees.name,
-  );
+  const [specieName, locationSpecie] = species.filter((spc) => responsibleFor
+  .includes(spc.id)).reduce(([spcName, spcLocation], { name, location }) => ([[...spcName, name], [...spcLocation, location]]), [[], []]);
+  // o uso desse return é uma Propert Short-Hand (usa as mesmas chaves do parametro)
+  return {
+    id,
+    fullName: `${firstName} ${lastName}`,
+    specie: specieName,
+    locations: locationSpecie,
+  };
+
 }
+  // employees.find(
+  //   (selectedEmployee) =>
+  //     selectedEmployee.firstName === employees.name
+  //     || selectedEmployee.lastName === employees.name
+  //     || selectedEmployee.id === employees.name,
+  // );
 // // // Função que valida animais.
 // function animalSearcher(employee) {
 //   // settando espaço para arrays.
@@ -34,26 +39,26 @@ function peopleSearcher() {
 //   return animals;
 // }
 
-function animalIdSearch({ responsibleFor }) {
-  // Variável que vê se o ID está incluso em responsibleFor.
-  // Reduce => api das criptos (puxar coins, fazer com reduce).
-  const speciesSearcher = species.filter((specie) => responsibleFor.includes(specie.id));
-  return speciesSearcher;
-}
+// function animalIdSearch({ responsibleFor }) {
+//   // Variável que vê se o ID está incluso em responsibleFor.
+//   // Reduce => api das criptos (puxar coins, fazer com reduce).
+//   const speciesSearcher = species.filter((specie) => responsibleFor.includes(specie.id));
+//   return speciesSearcher;
+// }
 
-function objectLocationMaker(employee, animals) {
-  const maker = {};
-  let animalsNames = '';
-  let locationNames = '';
-  // Percorre o array dos bichim e coloca nomes na variável animalsNames e locationNames.
-  animalsNames = animals.map((animal) => animal.name);
-  locationNames = animals.map((animal) => animal.location);
-  maker.id = employee.id;
-  maker.fullName = `${employee.firstName} ${employee.lastName}`;
-  maker.species = animalsNames;
-  maker.locations = locationNames;
-  return maker;
-}
+// function objectLocationMaker(employee, animals) {
+//   const maker = {};
+//   let animalsNames = '';
+//   let locationNames = '';
+//   // Percorre o array dos bichim e coloca nomes na variável animalsNames e locationNames.
+//   animalsNames = animals.map((animal) => animal.name);
+//   locationNames = animals.map((animal) => animal.location);
+//   maker.id = employee.id;
+//   maker.fullName = `${employee.firstName} ${employee.lastName}`;
+//   maker.species = animalsNames;
+//   maker.locations = locationNames;
+//   return maker;
+// }
 
 function getEmployeeById(idEmployee) {
   // Usando destructor = {}.
@@ -73,17 +78,18 @@ function getEmployeeByName(employeeName) {
 function getEmployeesCoverage(employees1) {
   // condicional que retorna toda lista de funcionários se não tiver parâmetros
   if (!employees1) {
-    return peopleSearcher();
+    //mapeia o employee porque não quer todas as chaves
+    return employees.map(peopleSearcher);
   } // fim do primeiro IF.
   const { name, id } = employees1;
   // Interrogação = retorno do true. : = if menor ['false']. Chama outras funções que fiz. => Se o obj tiver a propriedade name, retorna só a pessoa correspondente. Id também.
-  const employee = name ? getEmployeeByName(name) : getEmployeeById(id);
-  const animals = animalIdSearch(employee);
+  const employee = name ? getEmployeeByName(name) : getEmployeeById(id) || {};
+  // const animals = animalIdSearch(employee);
   // Condicional de erro caso não exista infos dos funcionários.
-  if (!employee.id || !employee.firstName || !employee.lastName) {
+  if (!employee.id) {
     throw new Error('Informações inválidas');
   } // fim do segundo IF.
-  return objectLocationMaker(employee, animals);
+  return peopleSearcher(employee);
 }
 
 console.log(getEmployeesCoverage());
