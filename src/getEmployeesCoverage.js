@@ -10,19 +10,20 @@ const { employees } = data;
 const { species } = data;
 
 // Função que valida funcionários.
-function peopleSearcher(employee) {
+function peopleSearcher() {
   // <Find> bate os dados esperados a serem retornados dos parâmetros fornecidos.
   // Retorna um objeto com os dados desejados, settados ali em cima.
-  if (!employee) {
-    return employees;
-  }
+  // if (!employee) {
+  //   return employees;
+  // }
+  // const employees = name ? getEmployeeByName(name) : getEmployeeById(id);
   return employees.find(
     (selectedEmployee) =>
-      selectedEmployee.firstName === employee.name
-      || selectedEmployee.lastName === employee.name
-      || selectedEmployee.id === employee.name,
+      selectedEmployee.firstName === employees.name
+      || selectedEmployee.lastName === employees.name
+      || selectedEmployee.id === employees.name,
   );
-// }
+}
 // // // Função que valida animais.
 // function animalSearcher(employee) {
 //   // settando espaço para arrays.
@@ -45,12 +46,12 @@ function objectLocationMaker(employee, animals) {
   let animalsNames = '';
   let locationNames = '';
   // Percorre o array dos bichim e coloca nomes na variável animalsNames e locationNames.
-  animalsNames = animals.map((animal) => animal.name).join(', ');
-  locationNames = animals.map((animal) => animal.location).join(', ');
+  animalsNames = animals.map((animal) => animal.name);
+  locationNames = animals.map((animal) => animal.location);
   maker.id = employee.id;
   maker.fullName = `${employee.firstName} ${employee.lastName}`;
   maker.species = animalsNames;
-  maker.location = locationNames;
+  maker.locations = locationNames;
   return maker;
 }
 
@@ -73,17 +74,18 @@ function getEmployeesCoverage(employees1) {
   // condicional que retorna toda lista de funcionários se não tiver parâmetros
   if (!employees1) {
     return peopleSearcher();
-  } // fim do segundo IF.
+  } // fim do primeiro IF.
   const { name, id } = employees1;
   // Interrogação = retorno do true. : = if menor ['false']. Chama outras funções que fiz. => Se o obj tiver a propriedade name, retorna só a pessoa correspondente. Id também.
   const employee = name ? getEmployeeByName(name) : getEmployeeById(id);
-  const animals = animalIdSearch({ responsibleFor });
+  const animals = animalIdSearch(employee);
   // Condicional de erro caso não exista infos dos funcionários.
   if (!employee.id || !employee.firstName || !employee.lastName) {
     throw new Error('Informações inválidas');
-  }
+  } // fim do segundo IF.
   return objectLocationMaker(employee, animals);
 }
-console.log(getEmployeesCoverage({ name: 'Sharonda' }));
+
+console.log(getEmployeesCoverage());
 
 module.exports = getEmployeesCoverage;
