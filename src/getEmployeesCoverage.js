@@ -13,7 +13,8 @@ const { species } = data;
 function peopleSearcher({ id, firstName, lastName, responsibleFor }) {
   // <Find> bate os dados esperados a serem retornados dos parâmetros fornecidos.
   const [specieName, locationSpecie] = species.filter((spc) => responsibleFor
-  .includes(spc.id)).reduce(([spcName, spcLocation], { name, location }) => ([[...spcName, name], [...spcLocation, location]]), [[], []]);
+    .includes(spc.id)).reduce(([spcName, spcLocation], { name, location }) =>
+    ([[...spcName, name], [...spcLocation, location]]), [[], []]);
   // o uso desse return é uma Propert Short-Hand (usa as mesmas chaves do parametro)
   return {
     id,
@@ -21,14 +22,13 @@ function peopleSearcher({ id, firstName, lastName, responsibleFor }) {
     species: specieName,
     locations: locationSpecie,
   };
-
 }
-  // employees.find(
-  //   (selectedEmployee) =>
-  //     selectedEmployee.firstName === employees.name
-  //     || selectedEmployee.lastName === employees.name
-  //     || selectedEmployee.id === employees.name,
-  // );
+// employees.find(
+//   (selectedEmployee) =>
+//     selectedEmployee.firstName === employees.name
+//     || selectedEmployee.lastName === employees.name
+//     || selectedEmployee.id === employees.name,
+// );
 // // // Função que valida animais.
 // function animalSearcher(employee) {
 //   // settando espaço para arrays.
@@ -78,7 +78,7 @@ function getEmployeeByName(employeeName) {
 function getEmployeesCoverage(employees1) {
   // condicional que retorna toda lista de funcionários se não tiver parâmetros
   if (!employees1) {
-    //mapeia o employee porque não quer todas as chaves
+    // mapeia o employee porque não quer todas as chaves
     return employees.map(peopleSearcher);
   } // fim do primeiro IF.
   const { name, id } = employees1;
