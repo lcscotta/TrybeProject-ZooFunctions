@@ -18,7 +18,7 @@ function peopleSearcher({ id, firstName, lastName, responsibleFor }) {
   return {
     id,
     fullName: `${firstName} ${lastName}`,
-    specie: specieName,
+    species: specieName,
     locations: locationSpecie,
   };
 
